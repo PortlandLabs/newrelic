@@ -1,11 +1,19 @@
 <?php
+namespace Portlandlabs\Newrelic;
 
-# This file loads automatically thanks to composer
+function addCustomParameter($key, $value) {
+    // Never pass these to newrelic
+    static $skip = ['SERVER.HTTP_AUTHORIZATION', 'SERVER.HTTP_COOKIE', 'SERVER.PHP_AUTH_DIGEST', 'SERVER.PHP_AUTH_PW'];
+
+    if (!in_array($key, $skip)) {
+        newrelic_add_custom_parameter($key, $value);
+    }
+}
 
 if (extension_loaded('newrelic')) {
     newrelic_name_transaction($_SERVER['REQUEST_URI'] ?: '/');
 
     foreach ($_SERVER as $key => $value) {
-        newrelic_add_custom_parameter('SERVER.' . $key, $value);
+        addCustomParameter('SERVER.' . $key, $value);
     }
 }
