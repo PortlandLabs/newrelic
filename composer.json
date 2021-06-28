@@ -1,0 +1,15 @@
+{
+    "name": "portlandlabs/newrelic",
+    "description": "Apply standard newrelic transaction stuff automatically",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Korvin Szanto",
+            "email": "me@kor.vin"
+        }
+    ],
+    "autoload": {
+        "files": ["newrelic.php"]
+    }
+}
