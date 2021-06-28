@@ -11,7 +11,7 @@ function addCustomParameter($key, $value) {
 }
 
 if (extension_loaded('newrelic')) {
-    newrelic_name_transaction($_SERVER['REQUEST_URI'] ?: '/');
+    newrelic_name_transaction(isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/');
 
     foreach ($_SERVER as $key => $value) {
         addCustomParameter('SERVER.' . $key, $value);
