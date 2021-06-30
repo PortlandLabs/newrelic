@@ -6,7 +6,7 @@ function addCustomParameter($key, $value) {
     static $skip = ['SERVER.HTTP_AUTHORIZATION', 'SERVER.HTTP_COOKIE', 'SERVER.PHP_AUTH_DIGEST', 'SERVER.PHP_AUTH_PW'];
 
     if (!in_array($key, $skip)) {
-        newrelic_add_custom_parameter($key, $value);
+        newrelic_add_custom_parameter($key, is_array($value) ? json_encode($value) : $value);
     }
 }
 
